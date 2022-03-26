@@ -53,6 +53,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,14 +79,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'default': {
         'ENGINE'  : os.getenv('DB_ENGINE','django.db.backends.mysql'), 
         'NAME'    : os.getenv('DB_NAME'),                
         'USER'    : os.getenv('DB_USER','root'),                     
         'PASSWORD': os.getenv('DB_PASSWORD'),      
         'HOST'    : os.getenv('DB_HOST','127.0.0.1'),              
         'PORT'    : os.getenv('DB_PORT',3306),
-    }
     }
 }
 

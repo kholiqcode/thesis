@@ -149,25 +149,27 @@
             <nav class="text-align-center mt-5" aria-label="Table navigation">
               <ul class="pagination justify-content-center">
                   <li class="page-item {% if has_previous is False %}disabled{% endif %}">
-                      <a href="{% url 'data_latih' %}?page={{previous_page}}" class="page-link">Previous</a>
+                      <a href="?page={{previous_page}}" class="page-link">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="{% url 'data_latih' %}?page=1">1</a></li>
+                    {% if current_page != 1 %}
+                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                    {% endif %}
                     <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
                 {% if current_page >= page_count %}
-                  <li class="page-item"><a class="page-link" href="{% url 'data_latih' %}?page={{current_page|add:-1}}">{{current_page|add:-1}}</a></li>
-                  <li class="page-item"><a class="page-link" href="{% url 'data_latih' %}?page={{current_page|add:-2}}">{{current_page|add:-2}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:-1}}">{{current_page|add:-1}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:-2}}">{{current_page|add:-2}}</a></li>
                   {% endif %}
                   <li class="page-item active" aria-current="page">
                       <span class="page-link">{{current_page}}</span>
                   </li>
                   {% if current_page <= page_count %}
-                  <li class="page-item"><a class="page-link" href="{% url 'data_latih' %}?page={{current_page|add:1}}">{{current_page|add:1}}</a></li>
-                  <li class="page-item"><a class="page-link" href="{% url 'data_latih' %}?page={{current_page|add:2}}">{{current_page|add:2}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:1}}">{{current_page|add:1}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:2}}">{{current_page|add:2}}</a></li>
                   {% endif %}
                   <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                  <li class="page-item"><a class="page-link" href="{% url 'data_latih' %}?page={{page_count}}">{{page_count}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{page_count}}">{{page_count}}</a></li>
                   <li class="page-item">
-                      <a class="page-link" href="{% url 'data_latih' %}?page={{next_page}}">Next</a>
+                      <a class="page-link" href="?page={{next_page}}">Next</a>
                   </li>
               </ul>
           </nav>
@@ -211,14 +213,6 @@
     src="{% static 'assets/js/plugins/dataTables.responsive.min.js' %}"
     
   ></script>
-  <script>
-        $(".nav-item").each(function() {
-            var e = window.location.href.split(/[?#]/)[0];
-            $(this).children('a')[0].href == e && "" != $(this).children('a').attr("href") && ($(this).children('a').addClass(
-                    "active"), $(this).children("ul.collapse").addClass("show"), $(this).children("ul.collapse").children("li.nav-item")
-                .addClass("active"))
-        })
-    </script>
   <script>
         $(".select2").select2({
             placeholder: "Pilih...",

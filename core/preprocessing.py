@@ -83,4 +83,5 @@ class PreProcessing():
 
     def callback(self, x):
         cleaning, casefolding, tokenizing, normalisasi, stopword, steeming = self._normalization(x)
-        return pd.Series({'cleaning': cleaning, 'casefolding': casefolding, 'tokenizing': tokenizing,'normalisasi':normalisasi,'stopword': stopword,'steeming': steeming, 'cleaned': " ".join(steeming)})
+        return " ".join(steeming)
+        # return pd.Series({'cleaning': cleaning, 'casefolding': casefolding, 'tokenizing': tokenizing,'normalisasi':normalisasi,'stopword': stopword,'steeming': steeming, 'cleaned': " ".join(steeming)})

@@ -1,0 +1,92 @@
+{% extends "app.html" %} {% load static %} {% block content %}
+<div class="content__header content__boxed overlapping">
+                <div class="content__wrap">
+                    <div class="d-md-flex align-items-end">
+                        <div class="me-auto">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="../../app-views/">App Views</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                                </ol>
+                            </nav>
+                            <!-- END : Breadcrumb -->
+                            <h1 class="page-title mb-0 mt-2">Users</h1>
+
+                            <p class="lead mb-lg-0">
+                                A card that contains an alphabetical list of the names and other information of the people in a group or area.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content__boxed">
+                <div class="content__wrap">
+                    <div class="row mt-3">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <!-- Custom styles -->
+                                    <form class="row g-3 needs-validation" action="" method="post" novalidate>
+                                        {% csrf_token %}
+                                        <div class="col-md-6">
+                                            <label for="_dm-vCustomLastname" class="form-label">Username</label>
+                                            <input id="_dm-vCustomLastname" type="text" class="form-control" name="username" required>
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">Please input your username</div>
+                                        </div>
+                                        <div class="col-12 pt-4 align-center">
+                                            <button class="btn btn-primary" type="submit">Tambah</button>
+                                        </div>
+                                    </form>
+                                    <!-- END : Custom styles -->
+                            </div>
+                        </div>
+                        {% for item in accounts %}
+                        <div class="col-sm-6 col-md-4 col-xl-3 mb-3">
+                            <div class="card">
+                                <div class="card-body pt-2">
+
+                                    <!-- Profile picture and short information -->
+                                    <div class="text-center position-relative">
+                                        <div class="pb-3">
+                                            <img class="img-lg rounded-circle" src="{{item.profile_image_url}}" alt="Profile Picture" loading="lazy">
+                                        </div>
+                                        <a href="#" class="h5 stretched-link btn-link">{{item.name}}</a>
+                                        <p class="text-muted">@{{item.username}}</p>
+                                    </div>
+                                    <p class="text-center">{{item.description}}</p>
+                                    <!-- END : Profile picture and short information -->
+
+                                    <!-- Social media buttons -->
+                                    <div class="mt-4 pt-3 text-center border-top text-muted">
+                                        <a href="{% url 'akun_detail' username=item.username %}" class="btn btn-hover btn-primary text-inherit p-1">
+                                            Detail
+                                        </a>
+                                    </div>
+                                    <!-- END : Social media buttons -->
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+
+                    <script>
+                        // Initialize the tooltip
+                        document.addEventListener('DOMContentLoaded', () => {
+                            let tooltipList = [...document.querySelectorAll('.add-tooltip')];
+                            tooltipList.map(function(tooltipEl) {
+                                new bootstrap.Tooltip(tooltipEl)
+                            })
+                        });
+                    </script>
+
+                </div>
+            </div>
+  {% endblock content %} 
+</div>

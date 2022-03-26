@@ -1548,4 +1548,15 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <!-- END - OFFCANVAS [ DEMO ] -->
 
+{% endblock %} {% block script %}
+<script>
+  $("li.nav-item").each(function () {
+    var e = window.location.href.split(/[?#]/)[0];
+    $(this).children("a")[0].href == e &&
+      "" != $(this).children("a").attr("href") &&
+      ($(this).children("a").addClass("active"),
+      $(this).parent().addClass("show"),
+      $(this).parent().parent(".nav-item").addClass("active"));
+  });
+</script>
 {% endblock %}

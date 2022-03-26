@@ -1,0 +1,151 @@
+{% extends "app.html" %} {% load static %} {% block content %}
+<div class="content__header content__boxed rounded-0">
+                <div class="content__wrap">
+
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../../app-views/">App Views</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                        </ol>
+                    </nav>
+                    <!-- END : Breadcrumb -->
+
+                    <h1 class="page-title mb-0 mt-2">Contact Us</h1>
+
+                    <p class="lead">
+                        Sample contact form layout.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="content__boxed">
+                <div class="content__wrap">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-7">
+
+                                <!-- Contact form -->
+                                <div class="card-body">
+                                    <form action="" method="post" >
+                                        {% csrf_token %}
+                                        <div class="form-group row">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="model_type">Data Model</label>
+                                                    <select
+                                                    id="model_type"
+                                                    class="select2 form-control"
+                                                    name="model_type"
+                                                    >
+                                                    <option selected disabled>Pilih Data Model</option>
+                                                    <option value="1">9:1 | TRAIN TEST</option>
+                                                    <option value="2">8:2 | TRAIN TEST</option>
+                                                    <option value="3">7:3 | TRAIN TEST</option>
+                                                    <option value="4">6:4 | TRAIN TEST</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="threshold" class="form-label">Threshold</label>
+                                                <input id="threshold_min" name="threshold_min" class="form-control" type="text" placeholder="Threshold Min">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="threshold" class="form-label">Threshold</label>
+                                                <input id="threshold_max" name="threshold_max" class="form-control" type="text" placeholder="Threshold Max">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary">Submit</button>
+                                    <form >
+                                </div>
+                                <!-- END : Contact form -->
+
+                            </div>
+
+                            <!-- Simple info banner -->
+                            <div class="col-md-5">
+                                <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 p-3">
+                                            <div class="h3 display-3">95%</div>
+                                            <span class="h6">Akurasi</span>
+                                        </div>
+                                        <div class="flex-grow-1 text-center ms-3">
+                                            <!-- Social media statistics -->
+                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
+                                                <div class="text-center">
+                                                    <h3 class="mb-1">Precision</h3>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h3 class="mb-1">Recall</h3>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h3 class="mb-1">F1 Score</h3>
+                                                </div>
+                                            </div>
+                                            <!-- END : Social media statistics -->
+                                            <!-- Social media statistics -->
+                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.81111111</span>
+                                                </div>
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.81111111</span>
+                                                </div>
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.81111111</span>
+                                                </div>
+                                            </div>
+                                            <!-- END : Social media statistics -->
+                                            <!-- Social media statistics -->
+                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
+                                                <div class="text-left">
+                                                    <span class="mb-1">1,345</span>
+                                                </div>
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.81111111</span>
+                                                </div>
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.81111111</span>
+                                                </div>
+                                            </div>
+                                            <!-- END : Social media statistics -->
+                                            <!-- Social media statistics -->
+                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.75789474 </span>
+                                                </div>
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.75789474 </span>
+                                                </div>
+                                                <div class="text-left">
+                                                    <span class="mb-1">0.75789474 </span>
+                                                </div>
+                                            </div>
+                                            <!-- END : Social media statistics -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- END : Simple info banner -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+  {% endblock content %} 
+
+  {% block script %}
+<script>
+     $(".select2").select2({
+            placeholder: "Pilih...",
+        });
+</script>
+  {% endblock script %}
+</div>

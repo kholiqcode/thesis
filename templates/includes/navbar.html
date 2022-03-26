@@ -81,6 +81,30 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{% url 'akun' %}" class="nav-link mininav-toggle"
+                ><i class="far fa-user me-2"></i>
+
+                <span class="nav-label mininav-content ms-1">Akun</span>
+              </a>
+            </li>
+            {% comment %} <li class="nav-item">
+              <a href="{% url 'setting' %}" class="nav-link mininav-toggle"
+                ><i class="fas fa-gear me-2"></i>
+
+                <span class="nav-label mininav-content ms-1">Setting</span>
+              </a>
+            </li> {% endcomment %}
+            <!-- END : Regular menu link -->
+          </ul>
+        </div>
+        <!-- END : Navigation Category -->
+
+        <!-- Navigation Category -->
+        <div class="mainnav__categoriy py-3">
+          <h6 class="mainnav__caption mt-0 px-3 fw-bold">Perhitungan</h6>
+          <ul class="mainnav__menu nav flex-column">
+            <!-- Regular menu link -->
+            <li class="nav-item">
               <a href="{% url 'data_latih' %}" class="nav-link mininav-toggle"
                 ><i class="demo-pli-file fs-5 me-2"></i>
 
@@ -94,6 +118,23 @@
                 <span class="nav-label mininav-content ms-1">PreProcessing</span>
               </a>
             </li>
+            <!-- Link with submenu -->
+            <li class="nav-item has-sub">
+                <a href="#" class="mininav-toggle nav-link"><i class="demo-pli-file-excel fs-5 me-2"></i>
+                    <span class="nav-label ms-1">Pembobotan</span>
+                </a>
+                <!-- Dashboard submenu list -->
+                <ul class="mininav-content nav collapse">
+                    <li class="nav-item">
+                        <a href="{% url 'term_frequency' %}" class="nav-link">Term Frequency</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'tf_idf' %}" class="nav-link">TF-IDF</a>
+                    </li>
+                </ul>
+                <!-- END : Dashboard submenu list -->
+              </li>
+              <!-- END : Link with submenu -->
             <!-- END : Regular menu link -->
           </ul>
         </div>
