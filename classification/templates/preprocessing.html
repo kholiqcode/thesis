@@ -4,16 +4,14 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="../../">Home</a></li>
-        <li class="breadcrumb-item"><a href="../../tables/">Tables</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Tabulator</li>
+        <li class="breadcrumb-item active" aria-current="page">PreProcessing</li>
       </ol>
     </nav>
     <!-- END : Breadcrumb -->
 
-    <h1 class="page-title mb-0 mt-2">Tabulator</h1>
+    <h1 class="page-title mb-0 mt-2">PreProcessing</h1>
 
-    <p class="lead">Interactive Tables and Data Grids for JavaScript.</p>
+    {% comment %} <p class="lead">Interactive Tables and Data Grids for JavaScript.</p> {% endcomment %}
   </div>
 </div>
 
@@ -25,101 +23,22 @@
 
         <!-- Toolbar -->
         <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="provinsi">Provinsi</label>
-                <select
-                  id="provinsi"
-                  
-                  class="select2 form-control"
-                  data-url="http://sdgs-dashboard.indoserv.net/panel/wilayah/provinsi"
-                >
-                  <option value="11">ACEH</option>
-                  <option value="12">SUMATERA UTARA</option>
-                  <option value="13">SUMATERA BARAT</option>
-                  <option value="14">RIAU</option>
-                  <option value="15">JAMBI</option>
-                  <option value="16">SUMATERA SELATAN</option>
-                  <option value="17">BENGKULU</option>
-                  <option value="18">LAMPUNG</option>
-                  <option value="19">KEPULAUAN BANGKA BELITUNG</option>
-                  <option value="21">KEPULAUAN RIAU</option>
-                  <option value="31">DKI JAKARTA</option>
-                  <option value="32">JAWA BARAT</option>
-                  <option value="33">JAWA TENGAH</option>
-                  <option value="34">DI YOGYAKARTA</option>
-                  <option value="35">JAWA TIMUR</option>
-                  <option value="36">BANTEN</option>
-                  <option value="51">BALI</option>
-                  <option value="52">NUSA TENGGARA BARAT</option>
-                  <option value="53">NUSA TENGGARA TIMUR</option>
-                  <option value="61">KALIMANTAN BARAT</option>
-                  <option value="62">KALIMANTAN TENGAH</option>
-                  <option value="63">KALIMANTAN SELATAN</option>
-                  <option value="64">KALIMANTAN TIMUR</option>
-                  <option value="65">KALIMANTAN UTARA</option>
-                  <option value="71">SULAWESI UTARA</option>
-                  <option value="72">SULAWESI TENGAH</option>
-                  <option value="73">SULAWESI SELATAN</option>
-                  <option value="74">SULAWESI TENGGARA</option>
-                  <option value="75">GORONTALO</option>
-                  <option value="76">SULAWESI BARAT</option>
-                  <option value="81">MALUKU</option>
-                  <option value="82">MALUKU UTARA</option>
-                  <option value="91">PAPUA BARAT</option>
-                  <option value="94">PAPUA</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="kabupaten">Kabupaten</label>
-                <select
-                  id="kabupaten"
-                  class="select2 form-control"
-                  data-url="http://sdgs-dashboard.indoserv.net/panel/wilayah/kabupaten"
-                >
-                  <option value="3501">KABUPATEN PACITAN</option>
-                  <option value="3502">KABUPATEN PONOROGO</option>
-                  <option value="3503">KABUPATEN TRENGGALEK</option>
-                  <option value="3504">KABUPATEN TULUNGAGUNG</option>
-                  <option value="3505">KABUPATEN BLITAR</option>
-                  <option value="3506">KABUPATEN KEDIRI</option>
-                  <option value="3507">KABUPATEN MALANG</option>
-                  <option value="3508">KABUPATEN LUMAJANG</option>
-                  <option value="3509">KABUPATEN JEMBER</option>
-                  <option value="3510">KABUPATEN BANYUWANGI</option>
-                  <option value="3511">KABUPATEN BONDOWOSO</option>
-                  <option value="3512">KABUPATEN SITUBONDO</option>
-                  <option value="3513">KABUPATEN PROBOLINGGO</option>
-                  <option value="3514">KABUPATEN PASURUAN</option>
-                  <option value="3515">KABUPATEN SIDOARJO</option>
-                  <option value="3516">KABUPATEN MOJOKERTO</option>
-                  <option value="3517">KABUPATEN JOMBANG</option>
-                  <option value="3518">KABUPATEN NGANJUK</option>
-                  <option value="3519">KABUPATEN MADIUN</option>
-                  <option value="3520">KABUPATEN MAGETAN</option>
-                  <option value="3521">KABUPATEN NGAWI</option>
-                  <option value="3522">KABUPATEN BOJONEGORO</option>
-                  <option value="3523">KABUPATEN TUBAN</option>
-                  <option value="3524">KABUPATEN LAMONGAN</option>
-                  <option value="3525">KABUPATEN GRESIK</option>
-                  <option value="3526">KABUPATEN BANGKALAN</option>
-                  <option value="3527">KABUPATEN SAMPANG</option>
-                  <option value="3528">KABUPATEN PAMEKASAN</option>
-                  <option value="3529">KABUPATEN SUMENEP</option>
-                  <option value="3571">KOTA KEDIRI</option>
-                  <option value="3572">KOTA BLITAR</option>
-                  <option value="3573">KOTA MALANG</option>
-                  <option value="3574">KOTA PROBOLINGGO</option>
-                  <option value="3575">KOTA PASURUAN</option>
-                  <option value="3576">KOTA MOJOKERTO</option>
-                  <option value="3577">KOTA MADIUN</option>
-                  <option value="3578">KOTA SURABAYA</option>
-                  <option value="3579">KOTA BATU</option>
-                </select>
-              </div>
-            </div>
+            <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="sentiment">Sentiment</label>
+                            <select
+                            id="sentiment"
+                            name="sentiment"
+                            class="select2 form-control"
+                            >
+                            <option selected disabled>Pilih Sentiment</option>
+                            <option value="semua">Semua</option>
+                            <option value="positive">Positif</option>
+                            <option value="negative">Negatif</option>
+                            <option value="neutral">Netral</option>
+                            </select>
+                        </div>
+                    </div>
           </div>
           <!-- END : Toolbar -->
          <div class="card-body">
@@ -365,27 +284,27 @@
                        <nav class="text-align-center mt-5" aria-label="Table navigation">
               <ul class="pagination justify-content-center">
                   <li class="page-item {% if has_previous is False %}disabled{% endif %}">
-                      <a href="?page={{previous_page}}" class="page-link">Previous</a>
+                      <a href="?page={{previous_page}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}" class="page-link">Previous</a>
                     </li>
                     {% if current_page != 1 %}
-                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=1{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">1</a></li>
                     {% endif %}
                     <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
                 {% if current_page >= page_count %}
-                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:-1}}">{{current_page|add:-1}}</a></li>
-                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:-2}}">{{current_page|add:-2}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:-1}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">{{current_page|add:-1}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:-2}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">{{current_page|add:-2}}</a></li>
                   {% endif %}
                   <li class="page-item active" aria-current="page">
                       <span class="page-link">{{current_page}}</span>
                   </li>
                   {% if current_page <= page_count %}
-                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:1}}">{{current_page|add:1}}</a></li>
-                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:2}}">{{current_page|add:2}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:1}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">{{current_page|add:1}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{current_page|add:2}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">{{current_page|add:2}}</a></li>
                   {% endif %}
                   <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                  <li class="page-item"><a class="page-link" href="?page={{page_count}}">{{page_count}}</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{page_count}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">{{page_count}}</a></li>
                   <li class="page-item">
-                      <a class="page-link" href="?page={{next_page}}">Next</a>
+                      <a class="page-link" href="?page={{next_page}}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}">Next</a>
                   </li>
               </ul>
           </nav>
@@ -514,6 +433,22 @@
         $('#kelurahan').change(function() {
             $('#inputkelurahan').val($(this).val());
             table.draw();
+        });
+
+        $('#sentiment').change(function() {
+          const urlParams = new URLSearchParams(window.location.search);
+
+          if($(this).val() == 'semua'){
+            urlParams.delete('sentiment')
+            window.location.search = urlParams;
+            return
+          }
+          
+          urlParams.set('sentiment', $(this).val());
+          urlParams.delete('page')
+
+          window.location.search = urlParams;
+          {% comment %} window.location.replace(window.location+"?sentiment="+$(this).val()); {% endcomment %}
         });
 
         $(document).ready(function() {

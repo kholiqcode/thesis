@@ -1,0 +1,197 @@
+{% extends "app.html" %} {% load static %} {% block content %}
+<div class="content__header content__boxed rounded-0">
+                <div class="content__wrap">
+
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            {% comment %} <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../../app-views/">App Views</a></li> {% endcomment %}
+                            <li class="breadcrumb-item active" aria-current="page">Perhitungan Manual</li>
+                        </ol>
+                    </nav>
+                    <!-- END : Breadcrumb -->
+
+                    <h1 class="page-title mb-0 mt-2">Perhitungan Manual</h1>
+
+                    <p class="lead">
+                        Inspect formula naive bayes step by step.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="content__boxed">
+                <div class="content__wrap">
+                    <div class="card text-white">
+                        <div class="row">
+                            <div class="col-md-7">
+
+                                <!-- Contact form -->
+                                <div class="card-body bg-primary">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="_dm-inputMsg" class="form-label">Text</label>
+                                            <textarea id="_dm-inputMsg" name="text" class="form-control" rows="5">{{text}}</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary">Submit</button>
+                                    <form>
+                                </div>
+                                <!-- END : Contact form -->
+                                <div class="card-footer text-center text-white">
+                                    <h2>{{sentiment|upper}}</h2>
+                                </div>
+
+                            </div>
+
+                            <!-- Simple info banner -->
+                            <div class="col-md-5">
+                                <!-- Tabs with base -->
+                            <div class="tab-base">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#_dm-tabsHome" type="button" role="tab" aria-controls="home" aria-selected="true">Positive</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-tabsProfile" type="button" role="tab" aria-controls="profile" aria-selected="false">Negative</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-tabsContact" type="button" role="tab" aria-controls="contact" aria-selected="false">Neutral</button>
+                                    </li>
+                                </ul>
+
+                                <!-- Tabs content -->
+                                <div class="tab-content">
+                                    <div id="_dm-tabsHome" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                        <h5 class="card-title">Positive</h5>
+                                        <!-- Striped rows -->
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>P(c)</th>
+                                                        <th>{{pc.positive}}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Term - tn|c</th>
+                                                        <th>Hasil - P(tn|c)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for k,v in wct.positive.items %}
+                                                        <tr>
+                                                            <td>{{k}}</td>
+                                                            <td>{{v}}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="2" class="text-center">Total</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-center">P(c)+P(tn|c)</th>
+                                                        <th class="text-center">{{predict_prior.positive}}</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <!-- END : Striped rows -->
+                                    </div>
+                                    <div id="_dm-tabsProfile" class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">
+                                        <h5 class="card-title">Negative</h5>
+                                           <!-- Striped rows -->
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>P(c)</th>
+                                                        <th>{{pc.negative}}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Term - tn|c</th>
+                                                        <th>Hasil - P(tn|c)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for k,v in wct.negative.items %}
+                                                        <tr>
+                                                            <td>{{k}}</td>
+                                                            <td>{{v}}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="2" class="text-center">Total</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-center">P(c)+P(tn|c)</th>
+                                                        <th class="text-center">{{predict_prior.negative}}</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <!-- END : Striped rows -->
+                                    </div>
+                                    <div id="_dm-tabsContact" class="tab-pane fade" role="tabpanel" aria-labelledby="contact-tab">
+                                        <h5 class="card-title">Neutral</h5>
+                                            <!-- Striped rows -->
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>P(c)</th>
+                                                        <th>{{pc.neutral}}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Term - tn|c</th>
+                                                        <th>Hasil - P(tn|c)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for k,v in wct.neutral.items %}
+                                                        <tr>
+                                                            <td>{{k}}</td>
+                                                            <td>{{v}}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="2" class="text-center">Total</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-center">P(c)+P(tn|c)</th>
+                                                        <th class="text-center">{{predict_prior.neutral}}</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <!-- END : Striped rows -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END : Tabs with base -->
+                            </div>
+                            <!-- END : Simple info banner -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+  {% endblock content %} 
+
+  {% block script %}
+<script>
+     $(".select2").select2({
+            placeholder: "Pilih...",
+        });
+</script>
+  {% endblock script %}
+</div>

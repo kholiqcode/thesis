@@ -1,9 +1,9 @@
 from django.urls import path
 
-from classification.views import akun, akun_detail, dashboard, data_latih, preprocessing, setting, term_frequency, tf_idf
+from classification.views import akun, akun_detail, dashboard, data_latih, manual, preprocessing, setting, term_frequency, tf_idf
 
 urlpatterns = [
-    path('', dashboard, name="dashboard"),
+    path('', setting, name="dashboard"),
     path('data-latih', data_latih, name="data_latih"),
     path('preprocessing', preprocessing, name="preprocessing"),
     path('term-frequency', term_frequency, name="term_frequency"),
@@ -11,4 +11,5 @@ urlpatterns = [
     path('akun', akun, name="akun"),
     path('akun/<str:username>', akun_detail, name="akun_detail"),
     path('setting', setting, name="setting"),
+    path('manual', manual, name="manual"),
 ]

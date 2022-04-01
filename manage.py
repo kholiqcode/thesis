@@ -3,6 +3,7 @@
 import os
 import sys
 import dotenv
+from core.MultiNB import MultiNB
 
 
 def main():
@@ -23,4 +24,5 @@ def main():
 
 
 if __name__ == '__main__':
+    nb = MultiNB
     main()

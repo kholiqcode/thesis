@@ -5,17 +5,15 @@
                     <!-- Breadcrumb -->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="../../">Home</a></li>
-                            <li class="breadcrumb-item"><a href="../../app-views/">App Views</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
                     <!-- END : Breadcrumb -->
 
-                    <h1 class="page-title mb-0 mt-2">Contact Us</h1>
+                    <h1 class="page-title mb-0 mt-2">Dashboard</h1>
 
                     <p class="lead">
-                        Sample contact form layout.
+                        Simple and create your own model.
                     </p>
 
                 </div>
@@ -26,6 +24,76 @@
                 <div class="content__wrap">
                     <div class="card">
                         <div class="row">
+                            <!-- Tiles -->
+                        <div class="col-sm-6 col-lg-3">
+
+                            <!-- Stat widget -->
+                            <div class="card bg-cyan text-white mb-3 mb-xl-3">
+                                <div class="card-body py-3 d-flex align-items-stretch">
+                                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-start">
+                                        <i class="demo-psi-file-word fs-1"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="h2 mb-0">{{total_document}}</h5>
+                                        <p class="mb-0">Total Dataset</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END : Stat widget -->
+
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+
+                            <!-- Stat widget -->
+                            <div class="card bg-primary text-white mb-3 mb-xl-3">
+                                <div class="card-body py-3 d-flex align-items-stretch">
+                                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-start">
+                                        <i class="demo-psi-file-word fs-1"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="h2 mb-0">{{total_positive}}</h5>
+                                        <p class="mb-0">Positive</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END : Stat widget -->
+
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+
+                            <!-- Stat widget -->
+                            <div class="card bg-orange text-white mb-3 mb-xl-3">
+                                <div class="card-body py-3 d-flex align-items-stretch">
+                                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-start">
+                                        <i class="demo-psi-file-word fs-1"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="h2 mb-0">{{total_negative}}</h5>
+                                        <p class="mb-0">Negative</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END : Stat widget -->
+
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+
+                            <!-- Stat widget -->
+                            <div class="card bg-secondary text-white mb-3 mb-xl-3">
+                                <div class="card-body py-3 d-flex align-items-stretch">
+                                    <div class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-start">
+                                        <i class="demo-psi-file-word fs-1"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="h2 mb-0">{{total_neutral}}</h5>
+                                        <p class="mb-0">Neutral</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END : Stat widget -->
+
+                        </div>
+                    <!-- END : Tiles -->
                             <div class="col-md-7">
 
                                 <!-- Contact form -->
@@ -42,20 +110,20 @@
                                                     name="model_type"
                                                     >
                                                     <option selected disabled>Pilih Data Model</option>
-                                                    <option value="1">9:1 | TRAIN TEST</option>
-                                                    <option value="2">8:2 | TRAIN TEST</option>
-                                                    <option value="3">7:3 | TRAIN TEST</option>
-                                                    <option value="4">6:4 | TRAIN TEST</option>
+                                                    <option value="1" {% if setting.model_type == 1 %} selected {% endif %} >9:1 | TRAIN TEST</option>
+                                                    <option value="2" {% if setting.model_type == 2 %} selected {% endif %}>8:2 | TRAIN TEST</option>
+                                                    <option value="3" {% if setting.model_type == 3 %} selected {% endif %}>7:3 | TRAIN TEST</option>
+                                                    <option value="4" {% if setting.model_type == 4 %} selected {% endif %}>6:4 | TRAIN TEST</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label for="threshold" class="form-label">Threshold</label>
-                                                <input id="threshold_min" name="threshold_min" class="form-control" type="text" placeholder="Threshold Min">
+                                                <label for="threshold" class="form-label">Threshold Minimum</label>
+                                                <input id="threshold_min" name="threshold_min" value="{{setting.threshold_min}}" class="form-control" type="number" placeholder="Threshold Min">
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label for="threshold" class="form-label">Threshold</label>
-                                                <input id="threshold_max" name="threshold_max" class="form-control" type="text" placeholder="Threshold Max">
+                                                <label for="threshold" class="form-label">Threshold Maksimum</label>
+                                                <input id="threshold_max" name="threshold_max" value="{{setting.threshold_max}}"  class="form-control" type="number" placeholder="Threshold Max">
                                             </div>
                                         </div>
                                         <button class="btn btn-primary">Submit</button>
@@ -68,69 +136,53 @@
                             <!-- Simple info banner -->
                             <div class="col-md-5">
                                 <div class="card">
-                                <div class="card-body text-center">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0 p-3">
-                                            <div class="h3 display-3">95%</div>
-                                            <span class="h6">Akurasi</span>
-                                        </div>
-                                        <div class="flex-grow-1 text-center ms-3">
-                                            <!-- Social media statistics -->
-                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
-                                                <div class="text-center">
-                                                    <h3 class="mb-1">Precision</h3>
-                                                </div>
-                                                <div class="text-center">
-                                                    <h3 class="mb-1">Recall</h3>
-                                                </div>
-                                                <div class="text-center">
-                                                    <h3 class="mb-1">F1 Score</h3>
-                                                </div>
+                                    <div class="card-body text-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-2 p-3">
+                                                <div class="h3 display-3">{{setting.accuracy_score}}%</div>
+                                                <span class="h6">Akurasi</span>
                                             </div>
-                                            <!-- END : Social media statistics -->
-                                            <!-- Social media statistics -->
-                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.81111111</span>
-                                                </div>
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.81111111</span>
-                                                </div>
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.81111111</span>
-                                                </div>
-                                            </div>
-                                            <!-- END : Social media statistics -->
-                                            <!-- Social media statistics -->
-                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
-                                                <div class="text-left">
-                                                    <span class="mb-1">1,345</span>
-                                                </div>
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.81111111</span>
-                                                </div>
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.81111111</span>
-                                                </div>
-                                            </div>
-                                            <!-- END : Social media statistics -->
-                                            <!-- Social media statistics -->
-                                            <div class="mt-4 pt-3 d-flex justify-content-around border-top">
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.75789474 </span>
-                                                </div>
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.75789474 </span>
-                                                </div>
-                                                <div class="text-left">
-                                                    <span class="mb-1">0.75789474 </span>
-                                                </div>
-                                            </div>
-                                            <!-- END : Social media statistics -->
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                       <!-- Striped rows -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sentiment</th>
+                                                    <th>Precision</th>
+                                                    <th>Recall</th>
+                                                    <th>F1</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Negative</td>
+                                                    <td>{{setting.precision_score.negative}}</td>
+                                                    <td>{{setting.recall_score.negative}}</td>
+                                                    <td>{{setting.f1_score.negative}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Neutral</td>
+                                                    <td>{{setting.precision_score.neutral}}</td>
+                                                    <td>{{setting.recall_score.neutral}}</td>
+                                                    <td>{{setting.f1_score.neutral}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Positive</td>
+                                                    <td>{{setting.precision_score.positive}}</td>
+                                                    <td>{{setting.recall_score.positive}}</td>
+                                                    <td>{{setting.f1_score.positive}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- END : Striped rows -->
+                                    </div>
+                                </div>
                             </div>
                             <!-- END : Simple info banner -->
 

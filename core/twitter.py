@@ -3,7 +3,7 @@ import dateutil.parser
 import json
 import os
 from core.classification import Classification
-from classification.models import Account, Tweet
+from classification.models import Account, Setting, Tweet
 import tweepy as tw
 from unidecode import unidecode
 import pandas as pd
@@ -26,7 +26,8 @@ class Twitter(object):
         #     f.write(str(tweets))
         #     return
         # Strips the newline character
-        classification = Classification()
+        setting = Setting.objects.filter(id=1).first()
+        classification = Classification(test_size=setting.model_type)
         for item in tweets:
             try:
                 sentiment = classification.predict(unidecode(item.full_text))
@@ -38,7 +39,7 @@ class Twitter(object):
                     'profile_id': str(item.user.id_str),
                     'created_at': None if item.created_at == '' else pd.to_datetime(item.created_at),
                     'tweet': unidecode(item.full_text),
-                    
+                    'mention_to':username,
                     'sentiment': sentiment,
                 }
                 obj, created  = Tweet.objects.update_or_create(

@@ -20,14 +20,19 @@ class Setting(models.Model):
     threshold_max = models.SmallIntegerField(null=True)
     accuracy_score = models.FloatField(null=True)
     confusion_matrix = models.FloatField(null=True)
-    precision_score = models.FloatField(null=True)
-    recall = models.FloatField(null=True)
-    f1 = models.FloatField(null=True)
+    precision_score = models.JSONField(null=True)
+    recall_score = models.JSONField(null=True)
+    f1_score = models.JSONField(null=True)
     is_active = models.BooleanField(null=True,default=0)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     class Meta:
         db_table = 'settings'
+
+    def get_accuracy_score(self):
+        if self.accuracy_score == int(self.accuracy_score):
+            self.accuracy_score = int(self.accuracy_score)
+        return self.accuracy_score
 
 class Account(models.Model):
     profile_id = models.CharField(max_length=100,null=True)
@@ -85,6 +90,7 @@ class Tweet(models.Model):
     source = models.CharField(max_length=100,null=True)
     retweet_date = models.DateTimeField(null=True)
     reply_to = models.JSONField(null=True)
+    mention_to = models.CharField(max_length=100,null=True)
     sentiment = models.CharField(null=True,max_length=20)
     created_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)

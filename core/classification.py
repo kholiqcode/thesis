@@ -19,6 +19,7 @@ class Classification():
         model_preprocessing = joblib.load(corpus_path+"/dataset_"+str(self.test_size)+"/preprocessing.model")
         model_pembobotan = joblib.load(corpus_path+"/dataset_"+str(self.test_size)+"/pembobotan.model")
         model_sklearn = joblib.load(corpus_path+"/dataset_"+str(self.test_size)+"/sklearn.model")
+        model_nb = joblib.load(corpus_path+"/dataset_"+str(self.test_size)+"/naive_bayes.model")
         
         self.preprocessing_train = model_preprocessing['train']
         self.preprocessing_test = model_preprocessing['test']
@@ -27,6 +28,7 @@ class Classification():
         self.pembobotan_tfidf = model_pembobotan['tfidf']
         self.vectorizer = model_sklearn['vectorizer']
         self.classifier = model_sklearn['classifier']
+        self.nb = model_nb['nb']
 
     def clean_text(self, text):
         preprocess = PreProcessing()
@@ -34,8 +36,8 @@ class Classification():
         return text_cleaned
 
     def predict(self, text):
-        text = self.clean_text(text)
-        vector_data = self.vectorizer.transform([text])
+        _text = self.clean_text(text)
+        vector_data = self.vectorizer.transform([_text])
         pred = self.classifier.predict(vector_data)
         prob = self.classifier.predict_proba(vector_data)
         prob = np.max(prob[0])
