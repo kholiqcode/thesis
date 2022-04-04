@@ -74,13 +74,23 @@
           <h6 class="mainnav__caption mt-0 px-3 fw-bold">Perhitungan</h6>
           <ul class="mainnav__menu nav flex-column">
             <!-- Regular menu link -->
-            <li class="nav-item">
-              <a href="{% url 'data_latih' %}" class="nav-link mininav-toggle"
-                ><i class="demo-pli-file fs-5 me-2"></i>
-
-                <span class="nav-label mininav-content ms-1">Data Latih</span>
-              </a>
-            </li>
+            <!-- Link with submenu -->
+            <li class="nav-item has-sub">
+                <a href="#" class="mininav-toggle nav-link"><i class="demo-pli-file fs-5 me-2"></i>
+                    <span class="nav-label ms-1">Dataset</span>
+                </a>
+                <!-- Dashboard submenu list -->
+                <ul class="mininav-content nav collapse">
+                    <li class="nav-item">
+                        <a href="{% url 'data_latih' %}" class="nav-link">Data Latih</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'data_uji' %}" class="nav-link">Data Uji</a>
+                    </li>
+                </ul>
+                <!-- END : Dashboard submenu list -->
+              </li>
+              <!-- END : Link with submenu -->
             <li class="nav-item">
               <a href="{% url 'preprocessing' %}" class="nav-link mininav-toggle"
                 ><i class="demo-pli-file-csv fs-5 me-2"></i>

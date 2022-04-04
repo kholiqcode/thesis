@@ -1,21 +1,25 @@
 import json
 import os
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from django.contrib import messages
-from numpy import int32
+
+import joblib
 import pandas as pd
 from config.settings import BASE_DIR
+from core.classification import Classification
 from core.twitter import Twitter
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import confusion_matrix, plot_confusion_matrix, classification_report, accuracy_score, f1_score, precision_score, recall_score
+from django.contrib import messages
 from django.core.paginator import Paginator
-import joblib
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from numpy import int32
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import (accuracy_score, classification_report,
+                             confusion_matrix, f1_score, plot_confusion_matrix,
+                             precision_score, recall_score)
+from sklearn.naive_bayes import MultinomialNB
 
 from classification.forms import DataLatihForm
 from classification.models import Account, Setting, Tweet
-from core.classification import Classification
+
 
 # Create your views here.
 def dashboard(request):
@@ -65,6 +69,51 @@ def data_latih(request):
             'page_count': page_count,
         }
         return render(request,'data_latih.html',context)
+
+def data_uji(request):
+    if request.method == "GET":
+        details = DataLatihForm(request.GET)
+        page = 1
+        q_sentiment = request.GET.get('sentiment')
+        
+        previous_page = 1
+        has_next = True
+        has_previous = False
+        if details.is_valid():
+            page = int(details.data.get('page'))
+        next_page = page+1
+        per_page = 10
+        limit = per_page*int(page)
+        setting = Setting.objects.filter(id=1).first()
+        classification = Classification(test_size=setting.model_type)
+        page_count = int(len(classification.preprocessing_test)/10)
+        
+
+        if int(page) != 1 & int(page) <= int(page_count):
+            previous_page = page-1
+            has_next = True
+            has_previous = True
+        elif page > page_count:
+            next_page = page_count
+            previous_page = page_count-1
+            has_next = False
+            has_previous = True
+
+        if request.GET.get('sentiment'):
+            dataset = classification.preprocessing_test[classification.preprocessing_test['sentiment'] == q_sentiment][limit-per_page:limit]
+        else:
+            dataset = classification.preprocessing_test[limit-per_page:limit]
+
+        context = {
+            'dataset':dataset,
+            'current_page':page,
+            'next_page':next_page,
+            'previous_page':previous_page,
+            'has_next':has_next,
+            'has_previous':has_previous,
+            'page_count': page_count,
+        }
+        return render(request,'data_uji.html',context)
 
 def preprocessing(request):
     if request.method == "GET":
