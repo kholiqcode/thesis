@@ -307,13 +307,16 @@ def akun(request):
         }
         return render(request,'akun.html',context)
     if request.method == "POST":
-        username = request.POST.get("username")
+        try:
+            username = request.POST.get("username")
 
-        twitter = Twitter()
-        twitter.account(username)
-        twitter.search(username)
-        
-        return redirect('akun')
+            twitter = Twitter()
+            twitter.account(username)
+            twitter.search(username)
+            
+            return redirect('akun')
+        except:
+            return redirect('akun')
 
 def setting(request):
     if request.method == "GET":
@@ -334,51 +337,57 @@ def setting(request):
         return render(request,'setting.html',context)
     
     if request.method == "POST":
-        model_type = request.POST.get("model_type",2)
-        threshold_min = request.POST.get("threshold_min",1)
-        threshold_max = request.POST.get("threshold_max")
-        if threshold_max is None or threshold_max == 0:
-            threshold_max = 1.0
-        else:
-            threshold_max = int(threshold_max)
-        classification = Classification(test_size=model_type)
-        vectorizer = TfidfVectorizer(smooth_idf=True,norm=None,min_df=int(threshold_min),max_df=threshold_max)
-        X_train = vectorizer.fit_transform(classification.preprocessing_train['cleaned'])
-        y_train = classification.preprocessing_train['sentiment']
-        y_test = classification.preprocessing_test['sentiment']
-        X_test = vectorizer.transform(classification.preprocessing_test['cleaned'])
-        
-        classifier = MultinomialNB()
-        classifier.fit(X_train, y_train)
-        y_pred = classifier.predict(X_test)
-        _confusion = confusion_matrix(y_test, y_pred)
-        _accuracy_score = accuracy_score(y_test, y_pred)
-        _precision_score = precision_score(y_test, y_pred,average=None)
-        _recall_score = recall_score(y_test, y_pred,average=None)
-        _f1_score = f1_score(y_test, y_pred,average=None)
+        try:
+            model_type = request.POST.get("model_type",2)
+            threshold_min = request.POST.get("threshold_min",1)
+            threshold_max = request.POST.get("threshold_max")
+            if threshold_min is None or threshold_max is None:
+                return redirect('dashboard')
+            if threshold_max is None or threshold_max == 0:
+                threshold_max = 1.0
+            else:
+                threshold_max = int(threshold_max)
+            classification = Classification(test_size=model_type)
+            vectorizer = TfidfVectorizer(smooth_idf=True,norm=None,min_df=int(threshold_min),max_df=threshold_max)
+            X_train = vectorizer.fit_transform(classification.preprocessing_train['cleaned'])
+            y_train = classification.preprocessing_train['sentiment']
+            y_test = classification.preprocessing_test['sentiment']
+            X_test = vectorizer.transform(classification.preprocessing_test['cleaned'])
+            
+            classifier = MultinomialNB()
+            classifier.fit(X_train, y_train)
+            y_pred = classifier.predict(X_test)
+            _confusion = confusion_matrix(y_test, y_pred)
+            _accuracy_score = accuracy_score(y_test, y_pred)
+            _precision_score = precision_score(y_test, y_pred,average=None)
+            _recall_score = recall_score(y_test, y_pred,average=None)
+            _f1_score = f1_score(y_test, y_pred,average=None)
 
-        model_dump = {'vectorizer': vectorizer, 'classifier': classifier, 'accuracy_score': _accuracy_score, 'confusion_matrix': _confusion,'precision_score':_precision_score,'recall':_recall_score,'f1':_f1_score}
-        joblib.dump(model_dump, open(os.path.join(BASE_DIR, "core/data/dataset_"+model_type)+"/sklearn.model", "wb"))
+            model_dump = {'vectorizer': vectorizer, 'classifier': classifier, 'accuracy_score': _accuracy_score, 'confusion_matrix': _confusion,'precision_score':_precision_score,'recall':_recall_score,'f1':_f1_score}
+            joblib.dump(model_dump, open(os.path.join(BASE_DIR, "core/data/dataset_"+model_type)+"/sklearn.model", "wb"))
 
-        data = {
-            'model_type':model_type,
-            'threshold_min':threshold_min,
-            'threshold_max':threshold_max,
-            'accuracy_score':round(_accuracy_score,2)*100,
-            'precision_score':{'negative':round(float(_precision_score[0]),2),'neutral':round(float(_precision_score[1]),2),'positive':round(float(_precision_score[2]),2)},
-            'recall_score':{'negative':round(float(_recall_score[0]),2),'neutral':round(float(_recall_score[1]),2),'positive':round(float(_recall_score[2]),2)},
-            'f1_score':{'negative':round(float(_f1_score[0]),2),'neutral':round(float(_f1_score[1]),2),'positive':round(float(_f1_score[2]),2)},
-        }
-        print(accuracy_score(y_test, y_pred))
-        
-        setting = Setting.objects.update_or_create(
-                        id = 1,
-                        defaults=data
-                    )
-        if setting:
-            Setting.objects.filter(id=1).update(is_active=0)
-            Setting.objects.filter(model_type=model_type).update(is_active=1)
-        return redirect('setting')
+            data = {
+                'model_type':model_type,
+                'threshold_min':threshold_min,
+                'threshold_max':threshold_max,
+                'accuracy_score':round(_accuracy_score,2)*100,
+                'precision_score':{'negative':round(float(_precision_score[0]),2),'neutral':round(float(_precision_score[1]),2),'positive':round(float(_precision_score[2]),2)},
+                'recall_score':{'negative':round(float(_recall_score[0]),2),'neutral':round(float(_recall_score[1]),2),'positive':round(float(_recall_score[2]),2)},
+                'f1_score':{'negative':round(float(_f1_score[0]),2),'neutral':round(float(_f1_score[1]),2),'positive':round(float(_f1_score[2]),2)},
+            }
+            print(accuracy_score(y_test, y_pred))
+            
+            setting = Setting.objects.update_or_create(
+                            id = 1,
+                            defaults=data
+                        )
+            if setting:
+                Setting.objects.filter(id=1).update(is_active=0)
+                Setting.objects.filter(model_type=model_type).update(is_active=1)
+            return redirect('setting')
+        except:
+            return redirect('setting')
+
 
 def akun_detail(request,username):
     if request.method == "GET":
