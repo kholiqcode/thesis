@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+  django:
+    container_name: django
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - django_static_volume:/usr/src/app/static
+    expose:
+      - 8000
+    env_file:
+      - ./.env
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    depends_on:
+      - db
+    networks:
+      - local
+
+  db:
+    container_name: database
+    restart: always
+    build: ./docker/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - ./docker/mysql/.env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - local
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./docker/nginx
+    volumes:
+      - django_static_volume:/usr/src/app/static
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST=sentimen.stack.co.id
+    depends_on:
+      - django
+    networks:
+      - local
+      - nginx_proxy
+
+volumes:
+  mysql_data:
+  django_static_volume:
+
+networks:
+  local:
+  nginx_proxy:
+    external:
+      name: nginx_nginx-proxy
