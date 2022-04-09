@@ -93,6 +93,8 @@
                             <!-- END : Stat widget -->
 
                         </div>
+
+
                     <!-- END : Tiles -->
                             <div class="col-md-7">
 
@@ -114,6 +116,7 @@
                                                     <option value="2" {% if setting.model_type == 2 %} selected {% endif %}>8:2 | TRAIN TEST</option>
                                                     <option value="3" {% if setting.model_type == 3 %} selected {% endif %}>7:3 | TRAIN TEST</option>
                                                     <option value="4" {% if setting.model_type == 4 %} selected {% endif %}>6:4 | TRAIN TEST</option>
+                                                    <option value="5" {% if setting.model_type == 5 %} selected {% endif %}>DEMO</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -194,10 +197,44 @@
   {% endblock content %} 
 
   {% block script %}
+    <script
+    src="{% static 'assets/js/plugins/select2.min.js' %}"
+    
+  ></script>
 <script>
      $(".select2").select2({
             placeholder: "Pilih...",
         });
+        const b = [25, 35, 98, 49]
+    {% comment %} c = new Chart(document.getElementById("_dm-doughnutChart"), {
+      type: "doughnut",
+      data: {
+        labels: [
+          "Resource usage",
+          "Completed Projects",
+          "Completed Tasks",
+          "Earning",
+        ],
+        datasets: [
+          {
+            data: b,
+            borderColor: "transparent",
+            backgroundColor: [
+              infoColor,
+              warningColor,
+              indigoColor,
+              successColor,
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: !0,
+        maintainAspectRatio: !1,
+        plugins: { legend: { display: !1 } },
+      },
+    }); {% endcomment %}
 </script>
+
   {% endblock script %}
 </div>

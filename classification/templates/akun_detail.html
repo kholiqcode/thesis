@@ -45,7 +45,7 @@
                         <div class="col-sm-6 col-lg-3">
 
                             <!-- Stat widget -->
-                            <div class="card bg-primary text-white mb-3 mb-xl-3">
+                            <div class="card bg-success text-white mb-3 mb-xl-3">
                                 <div class="card-body py-3 d-flex align-items-stretch">
                                     <div class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-start">
                                         <i class="demo-psi-file-word fs-1"></i>
@@ -79,7 +79,7 @@
                         <div class="col-sm-6 col-lg-3">
 
                             <!-- Stat widget -->
-                            <div class="card bg-secondary text-white mb-3 mb-xl-3">
+                            <div class="card bg-indigo text-white mb-3 mb-xl-3">
                                 <div class="card-body py-3 d-flex align-items-stretch">
                                     <div class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-start">
                                         <i class="demo-psi-file-word fs-1"></i>
@@ -94,6 +94,15 @@
 
                         </div>
                     <!-- END : Tiles -->
+                                            <div class="col-sm-12 col-lg-12">
+
+                            <!-- Doughnut Chart -->
+                            <div class="pt-4" style="height: 250px">
+                                <canvas id="_dm-doughnutChart" data-arrchart="{{chart_data}}"></canvas>
+                            </div>
+                            <!-- END : Doughnut Chart -->
+
+                        </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="sentiment">Sentiment</label>
@@ -207,6 +216,8 @@
     src="{% static 'assets/js/plugins/dataTables.responsive.min.js' %}"
     
   ></script>
+   <!-- Plugin scripts [ OPTIONAL ] -->
+    <script src="{% static 'assets/pages/dashboard-3.min.32130723cab1e81c3f1c9160cba8181f75b388e53e5c2a01f0249ce70bbd8091.js' %}" defer></script>
   <script>
         $(".select2").select2({
             placeholder: "Pilih...",

@@ -327,6 +327,7 @@ def setting(request):
         total_positive = len(merge_df[merge_df['sentiment'] == 'positive'])
         total_negative = len(merge_df[merge_df['sentiment'] == 'negative'])
         total_neutral = len(merge_df[merge_df['sentiment'] == 'neutral'])
+        
         context = {
             'setting':setting,
             'total_document':total_document,
@@ -431,6 +432,10 @@ def akun_detail(request,username):
         total_positive = tweet.filter(sentiment=1).count()
         total_negative = tweet.filter(sentiment=2).count()
         total_neutral = tweet.filter(sentiment=0).count()
+        percentage_positive = (total_positive/total_document)*100
+        percentage_negative = (total_negative/total_document)*100
+        percentage_neutral =(total_neutral/total_document)*100
+        chart_data = [percentage_positive,percentage_negative,percentage_neutral]
         context = {
             'account':account,
             'tweet':results.object_list,
@@ -444,6 +449,10 @@ def akun_detail(request,username):
             'total_positive':total_positive,
             'total_negative':total_negative,
             'total_neutral':total_neutral,
+            'percentage_positive':percentage_positive,
+            'percentage_negative':percentage_negative,
+            'percentage_neutral':percentage_neutral,
+            'chart_data':chart_data,
         }
         return render(request,'akun_detail.html',context)
 
