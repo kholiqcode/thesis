@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   django:
-    container_name: django
+    container_name: django_sentimen
     build:
       context: ./
       dockerfile: Dockerfile
@@ -12,24 +12,25 @@ services:
     env_file:
       - ./.env
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
-    depends_on:
+    # depends_on:
+    #   - db
+    networks:
+      - local
       - db
-    networks:
-      - local
 
-  db:
-    container_name: database
-    restart: always
-    build: ./docker/mysql
-    command: --default-authentication-plugin=mysql_native_password
-    env_file:
-      - ./docker/mysql/.env
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - local
+  # db:
+  #   container_name: database
+  #   restart: always
+  #   build: ./docker/mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   env_file:
+  #     - ./docker/mysql/.env
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #   networks:
+  #     - local
 
   nginx:
     container_name: nginx
@@ -56,3 +57,6 @@ networks:
   nginx_proxy:
     external:
       name: nginx_nginx-proxy
+  db:
+    external:
+      name: plagiarism_database
