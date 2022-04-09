@@ -12,9 +12,12 @@ import os
 from django.core.wsgi import get_wsgi_application
 import dotenv
 
+from core.MultiNB import MultiNB
+
 dotenv.load_dotenv(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
 )
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
+nb = MultiNB
 application = get_wsgi_application()
