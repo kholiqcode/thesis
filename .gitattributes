@@ -1,3 +1,4 @@
 *.model filter=lfs diff=lfs merge=lfs -text
 *.html linguist-detectable=false
 *.js linguist-detectable=false
+*.sql linguist-detectable=false
